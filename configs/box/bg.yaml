@@ -1,0 +1,64 @@
+model:
+  pokingrecon:
+    rand_method: 'inv_segany_mmask_random'
+    motion_mask_loss: False
+    motion_mask_loss_weight: 0.001
+    recon_volume_size: 1.0
+    static_on: True
+    white_bkgd: False
+    mdepth_fill_bg: True
+    mdepth_fill_thresh_bg: 0.0
+    N_samples: 192
+    N_rand: 4096
+    chunk: 8192
+    val_chunk: 2048
+    num_frames: 0
+    trim_start: 1
+    dynamic_on: False
+    use_viewdirs: True
+    depth_loss_on: True
+    depth_loss_lambda: 1.0
+    depth_loss_all: False
+    depth_loss_miniter: 0
+    depth_loss_func: 'l1'
+    sparse_loss: False
+    sparse_loss_weight: 0.0001
+    volsdf:
+      use_nerfplusplus: True
+      obj_bounding_radius: 3.0
+      surface_cfg:
+        radius_init: 1.0 # ?
+datasets:
+  train: ("kinectrobot_2022_0801_4_skip2_53to110_trainval_tf1",)
+  test: "kinectrobot_2022_0801_4_skip2_53to110_trainval_tf1"
+dataset:
+  kinectrobot:
+    data_scale: 2.5
+    clip_far: 2.75
+    far: 3.0
+    near: 0.0
+
+    keep_frames: [ 57,58,59,64,65,66,67,68,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,102,103,104,105,106,107,108 ]
+solver:
+  batch_size: 35
+  max_lr: 0.0005
+  lrate_decay: 250000
+  num_epochs: 10000
+  bias_lr_factor: 1
+  weight_decay: 0.0
+  weight_decay_bias: 0.0
+  save_every: True
+  save_freq: 50
+  find_unused_parameters: True
+  dist:
+    sampler:
+      shuffle: True
+test:
+  do_visualization: True
+  visualizer: pokingrecon
+  evaluators: [ ]
+
+dataloader:
+  collator: ExtendedBatchCollator
+
+tf: 4

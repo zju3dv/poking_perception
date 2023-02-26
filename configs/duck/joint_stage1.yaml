@@ -1,0 +1,138 @@
+model:
+
+  pokingrecon:
+    nobjs: 1
+    vi_shift: 1
+    
+    mdepth_loss_on: False
+    smooth_loss_on: True
+    smooth_loss1_on: False
+    smooth_loss2_on: True
+    smooth_loss_weight: 0.005
+    recon_volume_size: 1.0
+    rand_method: 'samask_inv0_random'
+    
+    frame_ids: [ 114,115,116,117,118,119,120,128,129,130,131,132,133,134,135,136,137,147,148,149,150,151,152,153,163,164,165,166 ]
+    fix_objpose_optim_frame_ids: [ ]
+    fix_objpose_optim_frame_ids_all_objs: [ [ 114 ] ]
+    pose_init: [
+      [ [ -0.1163,  0.3556,  0.0647, -0.0963,  0.0124,  0.6311 ],
+        [ -0.122 ,  0.315 ,  0.0619, -0.0917,  0.0157,  0.5361 ],
+        [ -0.128 ,  0.2849,  0.0598, -0.0909,  0.019 ,  0.4543 ],
+        [ -0.1445,  0.2378,  0.0561, -0.0678,  0.0144,  0.2707 ],
+        [ -0.1574,  0.1981,  0.0537, -0.0586,  0.0148,  0.0841 ],
+        [ -0.1638,  0.1773,  0.0528, -0.0594,  0.0114, -0.0138 ],
+        [ -0.1696,  0.1605,  0.0519, -0.0642,  0.0154, -0.0938 ],
+        [ -0.1714,  0.1535,  0.0509, -0.0628,  0.0116, -0.1171 ],
+        [ -0.167 ,  0.1048,  0.0484, -0.0536,  0.0106, -0.1845 ],
+        [ -0.1652,  0.0829,  0.0475, -0.0487,  0.0035, -0.2224 ],
+        [ -0.1586,  0.0246,  0.045 , -0.0273, -0.0026, -0.3342 ],
+        [ -0.1548, -0.0022,  0.044 , -0.0228, -0.    , -0.379 ],
+        [ -0.1494, -0.0291,  0.0432, -0.0203, -0.0073, -0.4337 ],
+        [ -0.142 , -0.0846,  0.043 , -0.0169, -0.0247, -0.5991 ],
+        [ -0.1398, -0.1143,  0.0417, -0.0138, -0.0282, -0.7002 ],
+        [ -0.1381, -0.1357,  0.0415, -0.0211, -0.0426, -0.7785 ],
+        [ -0.1356, -0.1578,  0.0427, -0.0039, -0.0377, -0.8634 ],
+        [ -0.1362, -0.1579,  0.0416, -0.0114, -0.0358, -0.8572 ],
+        [ -0.13  , -0.1559,  0.0421, -0.0057, -0.043 , -0.886 ],
+        [ -0.1172, -0.1523,  0.0424,  0.0012, -0.0445, -0.9449 ],
+        [ -0.0779, -0.1471,  0.0428,  0.0154, -0.0681, -1.1708 ],
+        [ -0.0721, -0.1469,  0.0434,  0.0208, -0.0707, -1.1939 ],
+        [ -0.0562, -0.1426,  0.0436,  0.0297, -0.0662, -1.2768 ],
+        [ -0.0525, -0.1412,  0.0436,  0.0366, -0.0674, -1.2999 ],
+        [ -0.0505, -0.1408,  0.044 ,  0.0349, -0.0694, -1.3025 ],
+        [ -0.0463, -0.1399,  0.0448,  0.0413, -0.0672, -1.3268 ],
+        [ -0.0148, -0.132 ,  0.0448,  0.0559, -0.078 , -1.5016 ],
+        [ 0.015 , -0.1265,  0.0429,  0.0477, -0.0946, -1.668 ] ]
+    ]
+    mdepth_fill: True
+    mdepth_fill_bg: True
+    motion_mask_loss: True
+    motion_mask_loss_all_area: False
+    motion_mask_loss_weight: 0.002
+    motion_mask_loss_exp: True
+    #    znegfill: True
+    static_on: True
+    white_bkgd: False
+    N_rand: 1024
+    chunk: 8192
+    #    val_chunk: 8192
+    val_chunk: 16384
+    netchunk: 131072
+    
+    
+    
+    
+    num_frames: 28
+    trim_start: 112
+    dynamic_on: True
+    use_viewdirs: True
+    depth_loss_on: True
+    depth_loss_lambda: 1.0
+    depth_loss_all: False
+    #    depth_loss_outside_mask: True
+    depth_loss_miniter: 0
+    depth_loss_func: 'l1'
+    sparse_loss: False
+    sparse_loss_weight: 0.0001
+    align_pose_eval: True
+    N_samples: 192
+    volsdf:
+      use_nerfplusplus: True
+      obj_bounding_radius: 3.0
+      W_geo_feat: 64
+      surface_cfg:
+        radius_init: 1.0 # ?
+        embed_multires: -1
+        W: 128
+      radiance_cfg:
+        W: 128
+    pretrained_volsdf: [ 'models/duck/fg/model_epoch_009999.pth' ]
+    override_poses_all_objs: [ True ]
+    ignore_gripper: True
+datasets:
+  train: ("kinectrobot_2022_0801_4_skip2_112to166_trainval_tf1",)
+  test: "kinectrobot_2022_0801_4_skip2_112to166_trainval_tf4"
+dataset:
+  kinectrobot:
+    gripper_mask_dilate: 7
+    data_scale: 2.5
+    clip_far: 2.75
+    far: 3.0
+    near: 0.0
+    
+    
+
+    keep_frames: [ 114,115,116,117,118,119,120,128,129,130,131,132,133,134,135,136,137,147,148,149,150,151,152,153,163,164,165,166 ]
+solver:
+
+  batch_size: 28
+  max_lr: 0.0005
+  pose_lr: 0.001
+  lrate_decay: 250000
+  lrate_decay_pose: 250000
+  num_epochs: 160000
+
+  bias_lr_factor: 1
+  weight_decay: 0.0
+  weight_decay_bias: 0.0
+  save_every: True
+  resume: True
+  load_model: "models/duck/bg/model_epoch_009999.pth"
+  save_freq: 1000
+  find_unused_parameters: True
+  #  detect_anomaly: True
+  dist:
+    sampler:
+      shuffle: True
+input:
+  shuffle: False
+test:
+  do_visualization: True
+  visualizer: pokingrecon
+  evaluators: [ 'pokingrecon_mask_eval','pokingrecon_pose_eval' ]
+  save_predictions: True
+
+dataloader:
+  collator: ExtendedBatchCollator
+tf: 4

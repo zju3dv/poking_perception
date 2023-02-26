@@ -1,0 +1,31 @@
+model:
+  meta_architecture: "MaskFusion"
+  maskfusion:
+    eval_select: [ 0,1 ]
+datasets:
+  train: ("kinectrobot_2022_0801_4_skip2_1to51_trainval_tf1",)
+  test: "kinectrobot_2022_0801_4_skip2_1to51_trainval_tf1"
+dataset:
+  kinectrobot:
+    data_scale: 2.5
+    clip_far: 2.75
+    far: 3.0
+    near: 0.0
+    load_raft_flow: True
+    load_raft_flow_intervals: [ 1,5,11,13 ]
+    name: moved
+    sa_init_pose: [ [ [ 0.9807786,   0.19349634 ,-0.02514961 , 0.16318495 ],
+                      [ -0.19289693,  0.98091498,  0.02442482,  0.05268083 ],
+                      [ 0.02939574, -0.01910406 , 0.99938527 , 0.0905705 ],
+                      [ 0.        ,  0.         , 0.         , 1. ] ] ]
+solver:
+  trainer: maskfusion
+test:
+  do_visualization: False
+  evaluators: [ 'maskfusion_mask','maskfusion_objpose','maskfusion_mesh' ]
+
+dataloader:
+  collator: ExtendedBatchCollator
+input:
+  shuffle: False
+tf: 1
