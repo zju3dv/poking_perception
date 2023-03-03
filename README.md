@@ -1,6 +1,6 @@
 # Perceiving Unseen 3D Objects by Poking (ICRA 2023)
 
-This project contains the implementation of our ICRA 2023 paper (arxiv)[https://arxiv.org/abs/2302.13375].
+This project contains the implementation of our ICRA 2023 paper [arxiv](https://arxiv.org/abs/2302.13375).
 
 Authors: Linghao Chen, Yunzhou Song, Hujun Bao, Xiaowei Zhou.
 
